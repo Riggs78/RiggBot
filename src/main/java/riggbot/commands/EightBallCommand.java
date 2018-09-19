@@ -1,5 +1,7 @@
 package riggbot.commands;
 
+import java.util.HashMap;
+
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
@@ -21,53 +23,30 @@ public class EightBallCommand extends Command {
 	protected void execute(CommandEvent event) {
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
-		int ans = 0;
-		ans = (int) Math.floor(Math.random() * 20 + 1);
-		String Answer = "Uhhhhh, wait a minute.";
-		if (ans == 1) {
-			Answer = "It is certain.";
-		} else if (ans == 2) {
-			Answer = "It is decidedly so.";
-		} else if (ans == 3) {
-			Answer = "Without a doubt.";
-		} else if (ans == 4) {
-			Answer = "Yes - definitely.";
-		} else if (ans == 5) {
-			Answer = "You may rely on it.";
-		} else if (ans == 6) {
-			Answer = "As I see it, yes.";
-		} else if (ans == 7) {
-			Answer = "Most likely.";
-		} else if (ans == 8) {
-			Answer = "Outlook good.";
-		} else if (ans == 9) {
-			Answer = "Yes.";
-		} else if (ans == 10) {
-			Answer = "Signs point to yes.";
-		} else if (ans == 11) {
-			Answer = "Reply hazy, try again.";
-		} else if (ans == 12) {
-			Answer = "ASk again later.";
-		} else if (ans == 13) {
-			Answer = "Better not tell you now.";
-		} else if (ans == 14) {
-			Answer = "Cannot predict now.";
-		} else if (ans == 15) {
-			Answer = "Concecntrate and ask again.";
-		} else if (ans == 16) {
-			Answer = "Don't count on it.";
-		} else if (ans == 17) {
-			Answer = "My reply is no.";
-		} else if (ans == 18) {
-			Answer = "My sources say no.";
-		} else if (ans == 19) {
-			Answer = "Outlook not so good.";
-		} else {
-			Answer = "Very doubtful.";
-		}
-		String ANswer = Answer;
-		chan.sendMessage(ANswer).queue(m -> {
-			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"8ball\", recieved " + ANswer);
+		HashMap<Integer, String> Answers = new HashMap<>();
+		Answers.put(1, "It is certain.");
+		Answers.put(2, "It is decidely so.");
+		Answers.put(3, "Without a doubt.");
+		Answers.put(4, "Yes - definitely.");
+		Answers.put(5, "You may rely on it.");
+		Answers.put(6, "As I see it, yes.");
+		Answers.put(7, "Most likely.");
+		Answers.put(8, "Outlook good.");
+		Answers.put(9, "Yes.");
+		Answers.put(10, "Signs point to yes.");
+		Answers.put(11, "Reply hazy, try again.");
+		Answers.put(12, "Ask again later.");
+		Answers.put(13, "Better not tell you now.");
+		Answers.put(14, "Cannot predict now.");
+		Answers.put(15, "Concentrate and ask again.");
+		Answers.put(16, "Don't count on it.");
+		Answers.put(17, "My reply is no.");
+		Answers.put(18, "My sources say no.");
+		Answers.put(19, "Outlook not so good.");
+		Answers.put(20, "Very doubtful.");
+		String ans = Answers.get(((int) Math.floor(Math.random()*20 +1)));
+		chan.sendMessage(ans).queue(m -> {
+			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"8ball\", recieved " + ans);
 		});
 	}
 }
