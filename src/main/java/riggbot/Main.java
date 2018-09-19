@@ -19,28 +19,37 @@ import riggbot.commands.SlotCommand;
 import riggbot.commands.SomeoneCommand;
 import riggbot.commands.WinSlotCommand;
 import riggbot.commands.WugCommand;
+import riggbot.config.Config;
 import riggbot.listeners.ReadyListener;
+import riggbot.logger.ErrorCodes;
 import riggbot.logger.Logger;
 
 public class Main {
 
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
-		JDA RiggBot = startBot(buildBot());
+		JDA RiggBot = startBot();
 	}
 
-	public static JDABuilder buildBot() {
-		EventWaiter cmdWaiter = new EventWaiter();
-		return new JDABuilder(AccountType.BOT).addEventListener(cmdWaiter).addEventListener(addCommands().build())
-				.addEventListener(new ReadyListener());
-	}
-
-	public static JDA startBot(JDABuilder jda) {
-		try {
-			return jda.setToken("NDg5OTgyODYxMzA3MjgxNDI3.Dn9UgA.1EpGDtrDxI8nLTeS3YnSaV1ihBE").build();
-		} catch (LoginException | IllegalArgumentException e) {
-			Logger.logFatal("Somthing went wrong!!");
-			e.printStackTrace();
+	public static JDA startBot() {
+		// check config exist
+		// if no -> create and terminate
+		// if yes -> start bot and read in values
+		if (!Config.configExist()) {
+			Logger.logFatal("Config File does not exist! Creating...", ErrorCodes.NO_CONFIG);
+		} else {
+			try {
+				EventWaiter cmdWaiter = new EventWaiter();
+				JDA jda = new JDABuilder(AccountType.BOT).addEventListener(cmdWaiter)
+						.addEventListener(addCommands().build()).addEventListener(new ReadyListener())
+						.setToken("NDg5OTgyODYxMzA3MjgxNDI3.Dn9UgA.1EpGDtrDxI8nLTeS3YnSaV1ihBE").build();
+				;
+				return jda;
+			} catch (LoginException e) {
+				Logger.logFatal("Somthing went wrong!", ErrorCodes.LOGIN_EXCEPTION);
+			} catch (IllegalArgumentException e) {
+				Logger.logFatal("Somthing went wrong!", ErrorCodes.ILLEAGE_ARGS);
+			}
 		}
 		return null;
 	}

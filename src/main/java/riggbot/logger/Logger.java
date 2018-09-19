@@ -11,8 +11,9 @@ public class Logger {
 	public static void logWarn(String m) {
 		System.err.println("["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [WARN] "+m);
 	}
-	public static void logFatal(String m) {
+	public static void logFatal(String m, ErrorCodes errCode) {
 		System.err.println("["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [FATAL] "+m);
+		System.exit(errCode.getErrCode());
 	}
 	public static void logDebug(String m) {
 		System.out.println("["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [DEBUG] "+m);
