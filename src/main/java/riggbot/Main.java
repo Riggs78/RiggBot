@@ -39,7 +39,7 @@ public class Main {
 		try {
 			return jda.setToken("NDg5OTgyODYxMzA3MjgxNDI3.Dn9UgA.1EpGDtrDxI8nLTeS3YnSaV1ihBE").build();
 		} catch (LoginException | IllegalArgumentException e) {
-			Logger.logFatal("Somthing went wrong!");
+			Logger.logFatal("Somthing went wrong!!");
 			e.printStackTrace();
 		}
 		return null;
