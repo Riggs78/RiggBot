@@ -25,6 +25,10 @@ public class DadJokeCommand extends Command {
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
 		HashMap<Integer, String> DadJokes = new HashMap<>();
+		/*
+		 * Flie f = new File("config/dadjokes.txt");
+		 * Scanner s = new Scanner(f);
+		 */
 		DadJokes.put(1, "Did you hear about the restaurant on the moon? Great food, no atmosphere.");
 		DadJokes.put(2, "What do you call a fake noodle? An Impasta.");
 		DadJokes.put(3, "How many apples grow on a tree? All of them.");
