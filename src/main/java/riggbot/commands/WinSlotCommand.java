@@ -15,10 +15,9 @@ public class WinSlotCommand extends Command {
 		this.name = "wslot";
 		this.aliases = new String[] { "wslots" };
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
-		this.cooldown = 0;
-		this.hidden = true;
 		this.requiredRole = "Bot Commander";
 		this.help = "Get a Jackpot";
+		this.arguments = "(outcome)";
 	}
 
 	@Override
@@ -39,7 +38,16 @@ public class WinSlotCommand extends Command {
 		slotEmote.put(11, "\uD83C\uDF2E");// taco
 		slotEmote.put(12, "\uD83E\uDD5A");// egg
 		slotEmote.put(13, "\uD83C\uDD71");// b
-		String slot1 = slotEmote.get(((int) Math.floor(Math.random() * 13 + 1)));
+		slotEmote.put(14, "\uD83D\uDC83");// tango girl
+		slotEmote.put(15, "\uD83D\uDED1");// stop
+		slotEmote.put(16, "\uD83C\uDFB0");// slot machine
+		slotEmote.put(17, "\uD83D\uDC8A");// pill
+		String slot1;
+		if (event.getArgs().isEmpty()) {
+			slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
+			}else{
+			 slot1 = slotEmote.get((int)Integer.parseInt(event.getArgs()));
+			};
 		String slot2 = slot1;
 		String slot3 = slot2;
 		String slots = slot1 + slot2 + slot3;
@@ -84,6 +92,18 @@ public class WinSlotCommand extends Command {
 				break;
 			case "\uD83C\uDD71":
 				win = "*wug*";
+				break;
+			case "\uD83D\uDC83"://tango
+				win = "***La cu-ca- | ra-cha, la cu-ca-ra-cha\r\n| ya no pue-de ca-mi-nar\r\npor-que no | tie-ne, por-que le fal-ta\r\n| u-na pa-ta de a-trás.***";
+				break;
+			case "\uD83D\uDED1"://stop
+				win = "**Halt, you have broken the law!**";
+				break;
+			case "\uD83C\uDFB0"://slot
+				win = "***BBBWWWWWWWWWWWWWWWWWWWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH***";
+				break;
+			case "\uD83D\uDC8A"://pill
+				win = "***d*** *R* **u** ***G*** **s**";
 				break;
 			default:
 				win = "Fuck You, you didn't win";
