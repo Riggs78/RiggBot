@@ -27,7 +27,6 @@ public class Config {
 	}
 
 	private static void populateCfg(File file) {
-		Logger.logDebug("Populating Config");
 		ConfigWriter.makeHeader(cfg);
 		ConfigWriter.write(cfg, new ConfigValue(ConfigTypes.STRING, "testvalString", "haha lol", "defaultString", "lol zozole test desc"));
 		ConfigWriter.write(cfg, new ConfigValue(ConfigTypes.INT, "testvalnt", "69696969", "defaultInt", "lol zozole test desc"));

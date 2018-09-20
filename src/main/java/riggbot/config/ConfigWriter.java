@@ -16,7 +16,6 @@ public class ConfigWriter {
 	
 	protected static void write(File cfg, ConfigValue cfgVal) {
 		try {
-			Logger.logDebug("lol wug???");
 			w = new BufferedWriter(new FileWriter(cfg,true));
 			w.append("#"+cfgVal.getDesc()+" ["+cfgVal.getDefaultValue()+"]\n");
 			if (cfgVal.getType()==ConfigTypes.STRING) {
