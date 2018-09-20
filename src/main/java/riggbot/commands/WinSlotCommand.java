@@ -13,7 +13,7 @@ import riggbot.util.CommandUtil;
 public class WinSlotCommand extends Command {
 	public WinSlotCommand() {
 		this.name = "wslot";
-		this.aliases = new String[] { "wslots" , "ws" };
+		this.aliases = new String[] { "wslots", "ws" };
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
 		this.requiredRole = "Bot Commander";
 		this.help = "Get a Jackpot";
@@ -45,9 +45,12 @@ public class WinSlotCommand extends Command {
 		String slot1;
 		if (event.getArgs().isEmpty()) {
 			slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
-			}else{
-			 slot1 = slotEmote.get((int)Integer.parseInt(event.getArgs()));
-			};
+		} else if ((Integer.parseInt(event.getArgs())) > 0 && (Integer.parseInt(event.getArgs())) < slotEmote.size()) {
+			slot1 = slotEmote.get((int) Integer.parseInt(event.getArgs()));
+		} else {
+			slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
+		}
+		;
 		String slot2 = slot1;
 		String slot3 = slot2;
 		String slots = slot1 + slot2 + slot3;
@@ -93,16 +96,16 @@ public class WinSlotCommand extends Command {
 			case "\uD83C\uDD71":
 				win = "*wug*";
 				break;
-			case "\uD83D\uDC83"://tango
-				win = "***La cu-ca- | ra-cha, la cu-ca-ra-cha\r\n| ya no pue-de ca-mi-nar\r\npor-que no | tie-ne, por-que le fal-ta\r\n| u-na pa-ta de a-trás.***";
+			case "\uD83D\uDC83":// tango
+				win = "***La cu-ca-ra-cha, la cu-ca-ra-cha\nya no pue-de ca-mi-nar\npor-que no tie-ne, por-que le fal-ta\nu-na pa-ta de a-trás.***";
 				break;
-			case "\uD83D\uDED1"://stop
+			case "\uD83D\uDED1":// stop
 				win = "**Halt, you have broken the law!**";
 				break;
-			case "\uD83C\uDFB0"://slot
+			case "\uD83C\uDFB0":// slot
 				win = "***BBBWWWWWWWWWWWWWWWWWWWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH***";
 				break;
-			case "\uD83D\uDC8A"://pill
+			case "\uD83D\uDC8A":// pill
 				win = "***d*** *R* **u** ***G*** **s**";
 				break;
 			default:
