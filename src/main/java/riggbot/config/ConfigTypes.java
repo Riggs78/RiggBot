@@ -1,10 +1,10 @@
 package riggbot.config;
 
 public enum ConfigTypes {
-	STRING("S:"),
-	INT("I:"),
-	DOUBLE("D:"),
-	BOOLEAN("B:");
+	STRING("String"),
+	INT("Integer"),
+	DOUBLE("Double"),
+	BOOLEAN("Boolean");
 	
 	private final String type;
 
