@@ -37,11 +37,11 @@ public class SlotCommand extends Command {
 		slotEmote.put(11, "\uD83C\uDF2E");// taco
 		slotEmote.put(12, "\uD83E\uDD5A");// egg
 		slotEmote.put(13, "\uD83C\uDD71");// b
-		String slot1 = slotEmote.get(((int) Math.floor(Math.random() * 13 + 1)));
-		String slot2 = slotEmote.get(((int) Math.floor(Math.random() * 13 + 1)));
-		String slot3 = slotEmote.get(((int) Math.floor(Math.random() * 13 + 1)));
+		String slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
+		String slot2 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
+		String slot3 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
 		String slots = slot1 + slot2 + slot3;
-		String win = "You lost, shithead!";
+		String win = "";
 		if (slot1.equals(slot2) && slot1.equals(slot3)) {
 			switch (slot1) {
 			case "\uD83C\uDFB7":
@@ -84,7 +84,7 @@ public class SlotCommand extends Command {
 				win = "*wug*";
 				break;
 			default:
-				win = "Fuck You, you didn't win";
+				win = "Fuck You, you don't win";
 				break;
 			}
 			chan.sendMessage(slots + "\n" + win).queue(m -> {

@@ -44,7 +44,7 @@ public class EightBallCommand extends Command {
 		Answers.put(18, "My sources say no.");
 		Answers.put(19, "Outlook not so good.");
 		Answers.put(20, "Very doubtful.");
-		String ans = Answers.get(((int) Math.floor(Math.random() * 20 + 1)));
+		String ans = Answers.get(((int) Math.floor(Math.random() * Answers.size() + 1)));
 		chan.sendMessage(ans).queue(m -> {
 			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"8ball\", recieved " + ans);
 		});
