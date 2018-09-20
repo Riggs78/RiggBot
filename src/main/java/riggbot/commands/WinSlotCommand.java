@@ -13,7 +13,7 @@ import riggbot.util.CommandUtil;
 public class WinSlotCommand extends Command {
 	public WinSlotCommand() {
 		this.name = "wslot";
-		this.aliases = new String[] { "wslots" };
+		this.aliases = new String[] { "wslots" , "ws" };
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
 		this.requiredRole = "Bot Commander";
 		this.help = "Get a Jackpot";
