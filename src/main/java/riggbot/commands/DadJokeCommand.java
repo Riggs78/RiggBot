@@ -20,7 +20,7 @@ public class DadJokeCommand extends Command {
 		this.name = "dad";
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
 		this.help = "Tells a really good joke.";
-		this.aliases = new String[] { "joke", "dadjoke" };
+		this.aliases = new String[] { "joke", "dadjoke", "dj" };
 	}
 
 	@Override
