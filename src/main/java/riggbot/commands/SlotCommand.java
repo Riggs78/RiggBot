@@ -25,28 +25,28 @@ public class SlotCommand extends Command {
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
 		int trys = 1;
-		Logger.logDebug("recieved command " + trys);
+//		Logger.logDebug("recieved command " + trys);
 		if (event.getArgs().isEmpty()) {
 			trys = 1;
-			Logger.logDebug("empty args " + trys);
+//			Logger.logDebug("empty args " + trys);
 		} else {
 			try {
 				trys = Integer.parseInt(event.getArgs());
-				Logger.logDebug("got something " + trys);
+//				Logger.logDebug("got something " + trys);
 			} catch (NumberFormatException e) {
 				trys = 1;
-				Logger.logDebug("not an int " + trys);
+//				Logger.logDebug("not an int " + trys);
 				return;
 			}
 		}
 		;
-		Logger.logDebug("recieved an int " + trys);
+//		Logger.logDebug("recieved an int " + trys);
 		if (!(trys > 0 && trys < 5)) {
 			trys = 1;
-			Logger.logDebug("not in bounds " + trys);
+//			Logger.logDebug("not in bounds " + trys);
 		} else {
 			for (int i = 0; i < trys; i++) {
-				Logger.logDebug("in for loop " + trys);
+//				Logger.logDebug("in for loop " + trys);
 				HashMap<Integer, String> slotEmote = new HashMap<>();
 				slotEmote.put(1, "\uD83C\uDFB7");// saxophone
 				slotEmote.put(2, "\uD83D\uDCAF");// 100
