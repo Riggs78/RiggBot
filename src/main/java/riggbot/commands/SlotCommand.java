@@ -24,6 +24,44 @@ public class SlotCommand extends Command {
 	protected void execute(CommandEvent event) {
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
+		int c = 0;
+		int v = 0;
+		HashMap<Integer, String> slotEmote = new HashMap<>();
+		slotEmote.put(c++, "\uD83C\uDFB7");// saxophone
+		slotEmote.put(c++, "\uD83D\uDCAF");// 100
+		slotEmote.put(c++, "\uD83C\uDF52");// cherries
+		slotEmote.put(c++, "\u0037\u20E3");// seven
+		slotEmote.put(c++, "\uD83D\uDC8E");// gem
+		slotEmote.put(c++, "\uD83D\uDD14");// bell
+		slotEmote.put(c++, "\uD83E\uDD14");// thinking
+		slotEmote.put(c++, "\uD83D\uDCA9");// poop
+		slotEmote.put(c++, "\uD83D\uDD2F");// star_of_david
+		slotEmote.put(c++, "\uD83C\uDF46");// eggplant
+		slotEmote.put(c++, "\uD83C\uDF2E");// taco
+		slotEmote.put(c++, "\uD83E\uDD5A");// egg
+		slotEmote.put(c++, "\uD83C\uDD71");// b
+		slotEmote.put(c++, "\uD83D\uDC83");// tango girl
+		slotEmote.put(c++, "\uD83D\uDED1");// stop
+		slotEmote.put(c++, "\uD83C\uDFB0");// slot machine
+		slotEmote.put(c++, "\uD83D\uDC8A");// pill
+		HashMap<String, String> slotWin = new HashMap<>();
+		slotWin.put(slotEmote.get(v++), "***Toot your horn, you magnificent bastard***");
+		slotWin.put(slotEmote.get(v++), "**you like, 100 dollaroonies**");
+		slotWin.put(slotEmote.get(v++), "**You're a cherry man!**");
+		slotWin.put(slotEmote.get(v++), "**thats like, two more sevens than one seven.**");
+		slotWin.put(slotEmote.get(v++), "***HOLY FUCKING $HIT YOU GOTTA A JACK POT $$$$$ !!!!!!!***");
+		slotWin.put(slotEmote.get(v++), "**dingus, dongus**");
+		slotWin.put(slotEmote.get(v++), "*Contemplate on your actions*");
+		slotWin.put(slotEmote.get(v++), "**ha ha you got shit**");
+		slotWin.put(slotEmote.get(v++), "***Mazel Tov, You're a Jew now!!!***");
+		slotWin.put(slotEmote.get(v++), "***OoOoooOOOoOooOoooooOOOOoOOooO hes gotta big dick***");
+		slotWin.put(slotEmote.get(v++), "**You can have like, 4 tacos, congratz**");
+		slotWin.put(slotEmote.get(v++), "*hahahaha* ***EGGNART***");
+		slotWin.put(slotEmote.get(v++), "*wug*");
+		slotWin.put(slotEmote.get(v++), "***La cu-ca-ra-cha, la cu-ca-ra-cha \\n ya no pue-de ca-mi-nar\\npor-que no tie-ne, por-que le fal-ta\\nu-na pa-ta de a-trás.***");
+		slotWin.put(slotEmote.get(v++), "**Halt, you have broken the law!**");
+		slotWin.put(slotEmote.get(v++), "***BBBWWWWWWWWWWWWWWWWWWWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH***");
+		slotWin.put(slotEmote.get(v++), "***d*** *R* **u** ***G*** **s**");
 /* uhhh ok, so this next bit SHOULD work, I tested it a bunch
 		this took  a while to get it in the right order to output what I wanted since i didn't want to require the arg
 		i prolly coulda done it better but im not sure how and this does work.*/
@@ -53,24 +91,6 @@ public class SlotCommand extends Command {
 				/* This stuff is now in a for loop
 					which wasnt hard but the syntax scared me a bit
 				 	evertything under this comment is as it was when you showed me Hashmaps*/
-				HashMap<Integer, String> slotEmote = new HashMap<>();
-				slotEmote.put(1, "\uD83C\uDFB7");// saxophone
-				slotEmote.put(2, "\uD83D\uDCAF");// 100
-				slotEmote.put(3, "\uD83C\uDF52");// cherries
-				slotEmote.put(4, "\u0037\u20E3");// seven
-				slotEmote.put(5, "\uD83D\uDC8E");// gem
-				slotEmote.put(6, "\uD83D\uDD14");// bell
-				slotEmote.put(7, "\uD83E\uDD14");// thinking
-				slotEmote.put(8, "\uD83D\uDCA9");// poop
-				slotEmote.put(9, "\uD83D\uDD2F");// star_of_david
-				slotEmote.put(10, "\uD83C\uDF46");// eggplant
-				slotEmote.put(11, "\uD83C\uDF2E");// taco
-				slotEmote.put(12, "\uD83E\uDD5A");// egg
-				slotEmote.put(13, "\uD83C\uDD71");// b
-				slotEmote.put(14, "\uD83D\uDC83");// tango girl
-				slotEmote.put(15, "\uD83D\uDED1");// stop
-				slotEmote.put(16, "\uD83C\uDFB0");// slot machine
-				slotEmote.put(17, "\uD83D\uDC8A");// pill
 				String slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
 				String slot2 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
 				String slot3 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
@@ -79,9 +99,10 @@ public class SlotCommand extends Command {
 				String winner;
 				if (slot1.equals(slot2) && slot1.equals(slot3)) {
 					winner = CommandUtil.getName(msg);
-					switch (slot1) {
-					case "\uD83C\uDFB7":// sax
-						win = "***Toot your horn, you magnificent bastard***";
+					//win = slotWin.get(slotEmote.get(slot1));switch (slot1) {
+				switch (slot1) {
+					case "":// sax
+						win = "\uD83C\uDFB7";
 						break;
 					case "\uD83D\uDCAF":// 100
 						win = "**you like, 100 dollaroonies**";
@@ -120,7 +141,7 @@ public class SlotCommand extends Command {
 						win = "*wug*";
 						break;
 					case "\uD83D\uDC83":// tango
-						win = "***La cu-ca- | ra-cha, la cu-ca-ra-cha\r\n| ya no pue-de ca-mi-nar\r\npor-que no | tie-ne, por-que le fal-ta\r\n| u-na pa-ta de a-trás.***";
+						win = "***La cu-ca-ra-cha, la cu-ca-ra-cha \n ya no pue-de ca-mi-nar\npor-que no tie-ne, por-que le fal-ta\nu-na pa-ta de a-trás.***";
 						break;
 					case "\uD83D\uDED1":// stop
 						win = "**Halt, you have broken the law!**";
