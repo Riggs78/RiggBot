@@ -135,7 +135,7 @@ public class SlotCommand extends Command {
 						win = "Fuck You, you don't win";
 						break;
 					}
-					chan.sendMessage(slots + "\n" + win + "\n ***Congratulations, "+ winner).queue(m -> {
+					chan.sendMessage(slots + "\n" + win + "\n ***Congratulations, ***"+ winner).queue(m -> {
 						Logger.logInfo(CommandUtil.getName(msg) + " ran command \"slots\", they won!");
 					});
 				} else {
