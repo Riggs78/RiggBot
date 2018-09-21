@@ -24,6 +24,9 @@ public class SlotCommand extends Command {
 	protected void execute(CommandEvent event) {
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
+/* uhhh ok, so this next bit SHOULD work, I tested it a bunch
+		this took  a while to get it in the right order to output what I wanted since i didn't want to require the arg
+		i prolly coulda done it better but im not sure how and this does work.*/
 		int trys = 1;
 //		Logger.logDebug("recieved command " + trys);
 		if (event.getArgs().isEmpty()) {
@@ -41,12 +44,15 @@ public class SlotCommand extends Command {
 		}
 		;
 //		Logger.logDebug("recieved an int " + trys);
-		if (!(trys > 0 && trys < 5)) {
+		if (!(trys > 0 && trys <= 3)) {
 			trys = 1;
 //			Logger.logDebug("not in bounds " + trys);
 		} else {
 			for (int i = 0; i < trys; i++) {
 //				Logger.logDebug("in for loop " + trys);
+				/* This stuff is now in a for loop
+					which wasnt hard but the syntax scared me a bit
+				 	evertything under this comment is as it was when you showed me Hashmaps*/
 				HashMap<Integer, String> slotEmote = new HashMap<>();
 				slotEmote.put(1, "\uD83C\uDFB7");// saxophone
 				slotEmote.put(2, "\uD83D\uDCAF");// 100
@@ -69,8 +75,10 @@ public class SlotCommand extends Command {
 				String slot2 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
 				String slot3 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
 				String slots = slot1 + slot2 + slot3;
-				String win = "";
+				String win;
+				String winner;
 				if (slot1.equals(slot2) && slot1.equals(slot3)) {
+					winner = CommandUtil.getName(msg);
 					switch (slot1) {
 					case "\uD83C\uDFB7":// sax
 						win = "***Toot your horn, you magnificent bastard***";
@@ -127,7 +135,7 @@ public class SlotCommand extends Command {
 						win = "Fuck You, you don't win";
 						break;
 					}
-					chan.sendMessage(slots + "\n" + win).queue(m -> {
+					chan.sendMessage(slots + "\n" + win + "\n ***Congratulations, "+ winner).queue(m -> {
 						Logger.logInfo(CommandUtil.getName(msg) + " ran command \"slots\", they won!");
 					});
 				} else {
