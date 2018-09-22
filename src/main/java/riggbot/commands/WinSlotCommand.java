@@ -1,14 +1,20 @@
 package riggbot.commands;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Scanner;
+
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
+import riggbot.logger.ErrorCodes;
 import riggbot.logger.Logger;
 import riggbot.util.CommandUtil;
+import riggbot.util.Pair;
 
 public class WinSlotCommand extends Command {
 	public WinSlotCommand() {
@@ -24,103 +30,70 @@ public class WinSlotCommand extends Command {
 	protected void execute(CommandEvent event) {
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
-		HashMap<Integer, String> slotEmote = new HashMap<>();
-		slotEmote.put(1, "\uD83C\uDFB7");// saxophone
-		slotEmote.put(2, "\uD83D\uDCAF");// 100
-		slotEmote.put(3, "\uD83C\uDF52");// cherries
-		slotEmote.put(4, "\u0037\u20E3");// seven
-		slotEmote.put(5, "\uD83D\uDC8E");// gem
-		slotEmote.put(6, "\uD83D\uDD14");// bell
-		slotEmote.put(7, "\uD83E\uDD14");// thinking
-		slotEmote.put(8, "\uD83D\uDCA9");// poop
-		slotEmote.put(9, "\uD83D\uDD2F");// star_of_david
-		slotEmote.put(10, "\uD83C\uDF46");// eggplant
-		slotEmote.put(11, "\uD83C\uDF2E");// taco
-		slotEmote.put(12, "\uD83E\uDD5A");// egg
-		slotEmote.put(13, "\uD83C\uDD71");// b
-		slotEmote.put(14, "\uD83D\uDC83");// tango girl
-		slotEmote.put(15, "\uD83D\uDED1");// stop
-		slotEmote.put(16, "\uD83C\uDFB0");// slot machine
-		slotEmote.put(17, "\uD83D\uDC8A");// pill
-		String slot1;
-		if (event.getArgs().isEmpty()) {
-			slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
-		} else if ((Integer.parseInt(event.getArgs())) > 0 && (Integer.parseInt(event.getArgs())) < slotEmote.size()) {
-			slot1 = slotEmote.get((int) Integer.parseInt(event.getArgs()));
-		} else {
-			slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size() + 1)));
-		}
-		;
-		String slot2 = slot1;
-		String slot3 = slot2;
-		String slots = slot1 + slot2 + slot3;
-		String win = "You lost, shithead!";
-		if (slot1.equals(slot2) && slot1.equals(slot3)) {
-			switch (slot1) {
-			case "\uD83C\uDFB7":
-				win = "***Toot your horn, you magnificent bastard***";
-				break;
-			case "\uD83D\uDCAF":
-				win = "**you like, 100 dollaroonies**";
-				break;
-			case "\uD83C\uDF52":
-				win = "**You're a cherry man!**";
-				break;
-			case "\u0037\u20E3":
-				win = "**thats like, two more sevens than one seven.**";
-				break;
-			case "\uD83D\uDC8E":
-				win = "***HOLY FUCKING $HIT YOU GOTTA A JACK POT $$$$$ !!!!!!!***";
-				break;
-			case "\uD83D\uDD14":
-				win = "**dingus, dongus**";
-				break;
-			case "\uD83E\uDD14":
-				win = "*Contemplate on your actions*";
-				break;
-			case "\uD83D\uDCA9":
-				win = "**ha ha you got shit**";
-				break;
-			case "\uD83D\uDD2F":
-				win = "***Mazel Tov, You're a Jew now!!!***";
-				break;
-			case "\uD83C\uDF46":
-				win = "***OoOoooOOOoOooOoooooOOOOoOOooO hes gotta big dick***";
-				break;
-			case "\uD83C\uDF2E":
-				win = "**You can have like, 4 tacos, congratz**";
-				break;
-			case "\uD83E\uDD5A":
-				win = "*hahahaha* ***EGGNART***";
-				break;
-			case "\uD83C\uDD71":
-				win = "*wug*";
-				break;
-			case "\uD83D\uDC83":// tango
-				win = "***La cu-ca-ra-cha, la cu-ca-ra-cha\nya no pue-de ca-mi-nar\npor-que no tie-ne, por-que le fal-ta\nu-na pa-ta de a-trás.***";
-				break;
-			case "\uD83D\uDED1":// stop
-				win = "**Halt, you have broken the law!**";
-				break;
-			case "\uD83C\uDFB0":// slot
-				win = "***BBBWWWWWWWWWWWWWWWWWWWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH***";
-				break;
-			case "\uD83D\uDC8A":// pill
-				win = "***d*** *R* **u** ***G*** **s**";
-				break;
-			default:
-				win = "Fuck You, you didn't win";
-				break;
+		int c = 0;
+		HashMap<Integer, String> Fortunes = new HashMap<>();
+		int f = 0;
+		File FortuneList = new File("config/Fortunes.txt");
+		Scanner scan;
+		try {
+			scan = new Scanner(FortuneList);
+			while (scan.hasNextLine()) {
+				Fortunes.put(f++, scan.nextLine());
 			}
-			chan.sendMessage(slots + "\n" + win).queue(m -> {
-				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"slots\", of course they won!");
+			String fortune = "" + Fortunes.get((int) Math.floor(Math.random() * Fortunes.size()));
+			HashMap<Integer, Pair<String, String>> slotEmote = new HashMap<>();
+			slotEmote.put(c++,
+					new Pair<String, String>("\uD83C\uDFB7", "***Toot your horn, you magnificent bastard!***"));// saxophone
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDCAF", "**you like, 100 dollaroonies**"));// 100
+			slotEmote.put(c++, new Pair<String, String>("\uD83C\uDF52", "**You're a cherry man!**"));// cherries
+			slotEmote.put(c++,
+					new Pair<String, String>("\u0037\u20E3", "**thats like, two more sevens than one seven.**"));// seven
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDC8E",
+					"***HOLY FUCKING $HIT YOU GOTTA A JACK POT $$$$$ !!!!!!!***"));// gem
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDD14", "**dingus, dongus**"));// bell
+			slotEmote.put(c++, new Pair<String, String>("\uD83E\uDD14", "*Contemplate on your actions*"));// thinking
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDCA9", "**ha ha you got shit**"));// poop
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDD2F", "***Mazel Tov, You're a Jew now!!!***"));// star_of_david
+			slotEmote.put(c++,
+					new Pair<String, String>("\uD83C\uDF46", "***OoOoooOOOoOooOoooooOOOOoOOooO hes gotta big dick***"));// eggplant
+			slotEmote.put(c++, new Pair<String, String>("\uD83C\uDF2E", "**You can have like, 4 tacos, congratz**"));// taco
+			slotEmote.put(c++, new Pair<String, String>("\uD83E\uDD5A", "*hahahaha* ***EGGNART***"));// egg
+			slotEmote.put(c++, new Pair<String, String>("\uD83C\uDD71", "*wug*"));// b
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDC83",
+					"***La cu-ca-ra-cha, la cu-ca-ra-cha \\\\n ya no pue-de ca-mi-nar\\\\npor-que no tie-ne, por-que le fal-ta\\\\nu-na pa-ta de a-trás.***"));// dancing_girl
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDED1", "**Halt, you have broken the law!**"));// stop
+			slotEmote.put(c++, new Pair<String, String>("\uD83C\uDFB0",
+					"***BBBWWWWWWWWWWWWWWWWWWWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH***"));// slot_machine
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDC8A", "***d*** *R* **u** ***G*** **s**"));// pill
+			slotEmote.put(c++, new Pair<String, String>("\uD83C\uDF40", "***IS THAT A WEED!?***"));// four_leaf_clover
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDD2E", "***" + fortune + "***"));// crystal_ball
+			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDCb6", "**have some euros**"));// euro
+			String slot1;
+			if (event.getArgs().isEmpty()) {
+				slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size()))).getLeft();
+			} else if ((Integer.parseInt(event.getArgs())) > 0
+					&& (Integer.parseInt(event.getArgs())) < slotEmote.size()) {
+				slot1 = slotEmote.get((int) Integer.parseInt(event.getArgs())).getLeft();
+			} else {
+				slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size()))).getLeft();
+			}
+			;
+			String slot2 = slot1;
+			String slot3 = slot2;
+			String slots = slot1 + slot2 + slot3;
+			@SuppressWarnings("unlikely-arg-type")
+			String win = slotEmote.get(slotEmote.get(slot1)).getRight();
+			chan.sendMessage(slots + "\n" + win + "\n ***Congratulations, ***" + msg.getAuthor().getName()).queue(m -> {
+				Logger.logInfo(
+						CommandUtil.getName(msg) + " ran command \"winslots\", of course they won; they cheated! ");
 			});
-		} else {
-			// don't win
-			chan.sendMessage(slots).queue(m -> {
-				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"slots\", they didn't win");
-			});
-		}
-	}
+			;
 
+		} catch (FileNotFoundException e) {
+			// TODO: add new err code
+			Logger.logFatal("No FortuneCookie.txt Found", ErrorCodes.NO_CONFIG);
+			e.printStackTrace();
+		}
+
+	}
 }
