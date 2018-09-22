@@ -11,6 +11,7 @@ import net.dv8tion.jda.core.JDABuilder;
 import riggbot.commands.CardCommand;
 import riggbot.commands.DadJokeCommand;
 import riggbot.commands.EightBallCommand;
+import riggbot.commands.CrystalBallCommand;
 import riggbot.commands.PingCommand;
 import riggbot.commands.RollCommand;
 import riggbot.commands.ShutdownCommand;
@@ -60,7 +61,7 @@ public class Main {
 		c.setOwnerId("117041162052698119");
 		c.addCommands(new PingCommand(), new WugCommand(), new ShutdownCommand(), new RollCommand(), new CardCommand(),
 				new SomeoneCommand(), new EightBallCommand(), new DadJokeCommand(),
-				new SlotCommand(), new WinSlotCommand());
+				new SlotCommand(), new WinSlotCommand(), new CrystalBallCommand());
 		return c;
 	}
 }
