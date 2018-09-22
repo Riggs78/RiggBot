@@ -103,7 +103,7 @@ public class SlotCommand extends Command {
 			}
 		} catch (FileNotFoundException e) {
 			// TODO: add new err code
-			Logger.logFatal("No FortuneCookie.txt Found", ErrorCodes.NO_CONFIG);
+			Logger.logFatal("No Fortunes.txt Found", ErrorCodes.NO_CONFIG);
 			e.printStackTrace();
 		}
 	}

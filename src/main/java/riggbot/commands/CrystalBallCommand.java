@@ -36,7 +36,7 @@ public class CrystalBallCommand extends Command {
 				Fortunes.put(i++, Scan.nextLine());
 			}
 			chan.sendMessage(Fortunes.get((int) Math.floor(Math.random() * Fortunes.size()))).queue(m -> {
-				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"crystalball\", received a joke");
+				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"crystalball\", received their fortune");
 			});
 		} catch (FileNotFoundException e) {
 			chan.sendMessage("Sorry, I don't have any fortunes right now.").queue(m -> {
