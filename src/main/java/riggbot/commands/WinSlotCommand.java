@@ -69,21 +69,29 @@ public class WinSlotCommand extends Command {
 			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDD2E", "***" + fortune + "***"));// crystal_ball
 			slotEmote.put(c++, new Pair<String, String>("\uD83D\uDCb6", "**have some euros**"));// euro
 			String slot1;
+			int rando = (int) Math.floor(Math.random() * slotEmote.size());
+			int endout;
 			if (event.getArgs().isEmpty()) {
-				slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size()))).getLeft();
+				slot1 = slotEmote.get(rando).getLeft();
 			} else if ((Integer.parseInt(event.getArgs())) > 0
 					&& (Integer.parseInt(event.getArgs())) < slotEmote.size()) {
-				slot1 = slotEmote.get((int) Integer.parseInt(event.getArgs())).getLeft();
+				endout = Integer.parseInt(event.getArgs());
+				slot1 = slotEmote.get(endout).getLeft();
 			} else {
-				slot1 = slotEmote.get(((int) Math.floor(Math.random() * slotEmote.size()))).getLeft();
+				slot1 = slotEmote.get(rando).getLeft();
 			}
 			;
+			if (slot1 == slotEmote.get(rando).getLeft()) {
+				endout = rando;
+			} else {
+				endout = Integer.parseInt(event.getArgs());
+			}
+			slot1 = slotEmote.get(endout).getLeft();
 			String slot2 = slot1;
 			String slot3 = slot2;
 			String slots = slot1 + slot2 + slot3;
-			@SuppressWarnings("unlikely-arg-type")
-			String win = slotEmote.get(slotEmote.get(slot1)).getRight();
-			chan.sendMessage(slots + "\n" + win + "\n ***Congratulations, ***" + msg.getAuthor().getName()).queue(m -> {
+			String win = slotEmote.get(endout).getRight();
+			chan.sendMessage(slots + "\n" + win).queue(m -> {
 				Logger.logInfo(
 						CommandUtil.getName(msg) + " ran command \"winslots\", of course they won; they cheated! ");
 			});

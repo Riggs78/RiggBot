@@ -91,7 +91,7 @@ public class SlotCommand extends Command {
 				String win;
 				if (slot1.equals(slot2) && slot1.equals(slot3)) {
 					win = slotEmote.get(slotEmote.get(slot1)).getRight();
-					chan.sendMessage(slots + "\n" + win + "\n ***Congratulations, ***" + msg.getAuthor().getName())
+					chan.sendMessage(slots + "\n" + win + "\n***Congratulations, " + msg.getAuthor().getName()+"***")
 							.queue(m -> {
 								Logger.logInfo(CommandUtil.getName(msg) + " ran command \"slots\", they won!");
 							});
