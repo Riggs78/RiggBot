@@ -16,6 +16,7 @@ public class ShutdownCommand extends Command{
 		this.help = "Shuts the bot down";
 		this.botPermissions = new Permission[] {Permission.MESSAGE_WRITE};
 		this.ownerCommand = true;
+		this.aliases = new String[] { "shut" , "stop" , "quit" , "end" , "fuck" , "oof" , "whoops" , "oops" , "leave" , "off" };
 	}
 	
 	@Override

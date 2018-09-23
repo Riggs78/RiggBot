@@ -13,6 +13,7 @@ public class WugCommand extends Command {
 
 	public WugCommand() {
 		this.name = "wug";
+		this.aliases = new String[] { "wuggy" , "w" };
 		this.help = "haha wug";
 		this.guildOnly = true;
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE, Permission.MESSAGE_ADD_REACTION };

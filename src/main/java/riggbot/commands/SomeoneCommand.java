@@ -14,7 +14,7 @@ import riggbot.util.CommandUtil;
 
 public class SomeoneCommand extends Command {
 	public SomeoneCommand() {
-		this.aliases = new String[] { "anyone" };
+		this.aliases = new String[] { "anyone" , "any" };
 		this.cooldown = 30;
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
 		this.help = "Mentions someone, anyone";

@@ -77,7 +77,6 @@ public class SlotCommand extends Command {
 					t = Integer.parseInt(event.getArgs());
 				} catch (NumberFormatException e) {
 					t = 1;
-					return;
 				}
 			}
 			if (!(t > 0 && t <= 3)) {

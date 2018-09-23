@@ -17,6 +17,7 @@ public class EightBallCommand extends Command {
 		this.name = "8ball";
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
 		this.help = "Answers truthfully";
+		this.aliases = new String[] { "8b", "eightball", "eball", "eb" };
 	}
 
 	@Override

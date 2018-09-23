@@ -16,6 +16,7 @@ public class RollCommand extends Command {
 		this.help = "Rolls a die with x number of sides";
 		this.arguments = "<sides>";
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
+		this.aliases = new String[] { "r" };
 	}
 
 	@Override
