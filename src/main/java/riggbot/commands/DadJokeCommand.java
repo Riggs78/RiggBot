@@ -31,14 +31,22 @@ public class DadJokeCommand extends Command {
 		int i = 0;
 		File JokeList = new File("config/DadJokeList.txt");
 		try {
-			@SuppressWarnings("resource")
 			Scanner JokeScan = new Scanner(JokeList);
 			while (JokeScan.hasNextLine()) {
-				DadJokes.put(i++, JokeScan.nextLine());
+				DadJokes.put(i++, JokeScan.nextLine().toLowerCase());
+			}
+			if (DadJokes.size()==0) {
+				chan.sendMessage("Sorry, I don't have any jokes right now.").queue(m->{
+					Logger.logWarn("DadJokeList.txt is empty");
+				});
+				JokeScan.close();
+				return;
 			}
 			chan.sendMessage(DadJokes.get((int) Math.floor(Math.random() * DadJokes.size()))).queue(m -> {
-				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"dadjoke\", received a joke");
 			});
+			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"dadjoke\", received a joke");
+
+			JokeScan.close();
 		} catch (FileNotFoundException e) {
 			chan.sendMessage("Sorry, I don't have any jokes right now.").queue(m -> {
 				Logger.logWarn("DadJokeList.txt not found");
