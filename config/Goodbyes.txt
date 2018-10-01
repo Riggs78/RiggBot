@@ -1,4 +1,3 @@
-zàijiàn
 vale
 shalom
 sayonara
@@ -8,11 +7,10 @@ auf Wiedersehen
 ciao
 arrivederci
 aloha
-adiós
+adios
 adieu
 addio
 adeus
-Ma’a ElSalama
 goobye
 cya
 see ya
@@ -34,3 +32,7 @@ beep boop
 yeet
 yeeting in 3... 2... 1... successfully yote
 ***AWAY***
+see you later alligator
+in a while crocodile
+bye bye
+goodnight
