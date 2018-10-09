@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import riggbot.exceptions.ConfigFormatException;
 import riggbot.logger.ErrorCodes;
 import riggbot.logger.Logger;
 
@@ -29,7 +30,11 @@ public class Config {
 	}
 
 	private static void parseConfig(File file) {
-		
+		try {
+			ConfigParse.parseAll(file);
+		} catch (ConfigFormatException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void populateCfg(File file) {

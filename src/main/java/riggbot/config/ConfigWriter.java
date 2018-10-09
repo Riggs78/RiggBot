@@ -17,14 +17,17 @@ public class ConfigWriter {
 	protected static void write(File cfg, ConfigValue cfgVal) {
 		try {
 			w = new BufferedWriter(new FileWriter(cfg,true));
-			w.append("#"+cfgVal.getDesc()+" ["+cfgVal.getDefaultValue()+"]\n");
 			if (cfgVal.getType()==ConfigTypes.STRING) {
+				w.append("#"+cfgVal.getDesc()+" S:["+cfgVal.getDefaultValue()+"]\n");
 				w.append("S:"+cfgVal.getName()+"="+cfgVal.getValue()+";\n\n");
 			}else if (cfgVal.getType()==ConfigTypes.INT) {
+				w.append("#"+cfgVal.getDesc()+" I:["+cfgVal.getDefaultValue()+"]\n");
 				w.append("I:"+cfgVal.getName()+"="+cfgVal.getValue()+";\n\n");
 			}else if (cfgVal.getType()==ConfigTypes.BOOLEAN) {
+				w.append("#"+cfgVal.getDesc()+" B:["+cfgVal.getDefaultValue()+"]\n");
 				w.append("B:"+cfgVal.getName()+"="+cfgVal.getValue()+";\n\n");
 			}else if (cfgVal.getType()==ConfigTypes.DOUBLE) {
+				w.append("#"+cfgVal.getDesc()+" D:["+cfgVal.getDefaultValue()+"]\n");
 				w.append("D:"+cfgVal.getName()+"="+cfgVal.getValue()+";\n\n");
 			}else {
 				Logger.logWarn("Tried to write config value with unknown type "+cfgVal.getType().getType()+"! Skipping...");
