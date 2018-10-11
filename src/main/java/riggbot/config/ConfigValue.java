@@ -16,24 +16,29 @@ public class ConfigValue {
 		this.name = name;
 	}
 
-	protected ConfigTypes getType() {
+	public ConfigTypes getType() {
 		return type;
 	}
 
-	protected String getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	protected String getDefaultValue() {
+	public String getDefaultValue() {
 		return defaultValue;
 	}
 
-	protected String getDesc() {
+	public String getDesc() {
 		return desc;
 	}
 
 	public String getName() {
 		return name;
+	}
+	
+	public String toString() {
+		return "Name:"+getName()+"; Type:"+getType()+"; Value:"+getValue()+"; DefaultValue:"+getDefaultValue()+"; Description:"+getDesc();
+		
 	}
 
 }

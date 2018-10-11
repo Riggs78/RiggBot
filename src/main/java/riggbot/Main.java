@@ -33,9 +33,6 @@ public class Main {
 	}
 
 	public static JDA startBot() {
-		// check config exist
-		// if no -> create and terminate
-		// if yes -> start bot and read in values
 		if (!Config.configExist()) {
 			Logger.logFatal("Config File does not exist! Creating...", ErrorCodes.NO_CONFIG);
 		} else {

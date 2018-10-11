@@ -4,7 +4,8 @@ public enum ConfigTypes {
 	STRING("String"),
 	INT("Integer"),
 	DOUBLE("Double"),
-	BOOLEAN("Boolean");
+	BOOLEAN("Boolean"),
+	UNKNOWN("Unknown");
 	
 	private final String type;
 
