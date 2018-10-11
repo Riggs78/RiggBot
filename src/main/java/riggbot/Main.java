@@ -21,6 +21,7 @@ import riggbot.commands.SuperSlotCommand;
 import riggbot.commands.WinSlotCommand;
 import riggbot.commands.WugCommand;
 import riggbot.config.Config;
+import riggbot.exceptions.ConfigValueNotFoundException;
 import riggbot.listeners.ReadyListener;
 import riggbot.logger.ErrorCodes;
 import riggbot.logger.Logger;
@@ -55,7 +56,12 @@ public class Main {
 	public static CommandClientBuilder addCommands() {
 		CommandClientBuilder c = new CommandClientBuilder();
 		c.setEmojis("\u2714", "\u2B55", "\u274C");
-		c.setPrefix(">");
+		try {
+			c.setPrefix(Config.getValue("prefix").getValue());
+		} catch (ConfigValueNotFoundException e) {
+			Logger.logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT);
+			e.printStackTrace();
+		}
 		c.setOwnerId("117041162052698119");
 		c.addCommands(new PingCommand(), new WugCommand(), new ShutdownCommand(), new RollCommand(), new CardCommand(),
 				new SomeoneCommand(), new EightBallCommand(), new DadJokeCommand(),
