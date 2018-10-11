@@ -41,13 +41,15 @@ public class Main {
 				EventWaiter cmdWaiter = new EventWaiter();
 				JDA jda = new JDABuilder(AccountType.BOT).addEventListener(cmdWaiter)
 						.addEventListener(addCommands().build()).addEventListener(new ReadyListener())
-						.setToken("NDg5OTgyODYxMzA3MjgxNDI3.Dn9UgA.1EpGDtrDxI8nLTeS3YnSaV1ihBE").build();
+						.setToken(Config.getValue("token").getValue()).build();
 				;
 				return jda;
 			} catch (LoginException e) {
 				Logger.logFatal("Somthing went wrong!", ErrorCodes.LOGIN_EXCEPTION);
 			} catch (IllegalArgumentException e) {
 				Logger.logFatal("Somthing went wrong!", ErrorCodes.ILLEAGE_ARGS);
+			} catch (ConfigValueNotFoundException e) {
+				Logger.logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT);
 			}
 		}
 		return null;

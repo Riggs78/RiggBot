@@ -48,19 +48,8 @@ public class Config {
 	}
 
 	private static void populateCfg(File file) {
-		// lol add actually values use the format given
-		//test values
-		ConfigWriter.makeHeader(file);
-		ConfigWriter.write(file, new ConfigValue(ConfigTypes.STRING, "testvalString", "haha lol", "defaultString",
-				"lol zozole test desc"));
-		ConfigWriter.write(file,
-				new ConfigValue(ConfigTypes.INT, "testvalnt", "69696969", "defaultInt", "lol zozole test desc"));
-		ConfigWriter.write(file,
-				new ConfigValue(ConfigTypes.BOOLEAN, "testvalBoolean", "false", "defaultBool", "lol zozole test desc"));
-		ConfigWriter.write(file, new ConfigValue(ConfigTypes.DOUBLE, "testvalDouble", "420.69", "defaultDouble",
-				"lol zozole test desc"));
-		//real values
 		ConfigWriter.write(file,new ConfigValue(ConfigTypes.STRING, "prefix", "!", "!", "Command prefix the bot uses"));
 		ConfigWriter.write(file,new ConfigValue(ConfigTypes.STRING, "LogLevel", "Info", "Info", "Logging level to use. Will log everything from the given level up. Fatal->Warn->Info->Debug"));
+		ConfigWriter.write(file,new ConfigValue(ConfigTypes.STRING, "token", "", "undef", "Token the bot uses to connect to the bot account"));
 	}
 }
