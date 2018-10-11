@@ -60,6 +60,7 @@ public class Config {
 		ConfigWriter.write(file, new ConfigValue(ConfigTypes.DOUBLE, "testvalDouble", "420.69", "defaultDouble",
 				"lol zozole test desc"));
 		//real values
-		ConfigWriter.write(file,new ConfigValue(ConfigTypes.STRING, "prefix", "!", "!", "Command prefix the bot uses"));	
+		ConfigWriter.write(file,new ConfigValue(ConfigTypes.STRING, "prefix", "!", "!", "Command prefix the bot uses"));
+		ConfigWriter.write(file,new ConfigValue(ConfigTypes.STRING, "LogLevel", "Info", "Info", "Logging level to use. Will log everything from the given level up. Fatal->Warn->Info->Debug"));
 	}
 }
