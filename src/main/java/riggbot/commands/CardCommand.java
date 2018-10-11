@@ -15,34 +15,21 @@ public class CardCommand extends Command {
 
 	public CardCommand() {
 		this.name = "card";
-		this.aliases = new String[] { "draw" , "c" };
+		this.aliases = new String[] { "draw", "c" };
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
 		this.help = "Picks a card, any card";
+		//this.ownerCommand = true;
 	}
 
 	@Override
 	protected void execute(CommandEvent event) {
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
-		// 109 jpgs, 106 pngs
-		int fti = (int) Math.floor(Math.random() * 2);
-		String fts = ".img";
-		int num = 0;
-		Logger.logDebug("card ("+num+")"+fts);
-		if (fti == 0) {
-			fts = ".png";
-			num = (int) Math.floor(Math.random() * 106 + 1);
-			Logger.logDebug("card ("+num+")"+fts);
-		} else {
-			fts = ".jpg";
-			num = (int) Math.floor(Math.random() * 109 + 1);
-			Logger.logDebug("card ("+num+")"+fts);
-		}
-		final int Num = num;
-		final String FTS = fts;
-		Logger.logDebug("card ("+num+")"+fts);
-		chan.sendFile(new File("src/main/resources/Cards/card (" + num +")"+ fts)).queue(m -> {
-			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"card\", received " + "card ("+Num+")"+FTS);
+		int Number_of_Cards = 143;
+		int img = (int) Math.floor(Math.random() * Number_of_Cards);
+		final int Image = img;
+				chan.sendFile(new File("src/main/resources/Cards/card (" + img + ").png")).queue(m -> {
+			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"card\", received " + "card (" + Image + ").png");
 		});
 	}
 }
