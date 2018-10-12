@@ -7,6 +7,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 
 public class RollCommand extends Command {
@@ -26,13 +27,13 @@ public class RollCommand extends Command {
 		long sides = 2;
 		if (event.getArgs().isEmpty()) {
 			chan.sendMessage("Try again dipshit, put a number next time!").queue(m -> {
-				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: no parameter given");
+				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: no parameter given", LoggingSections.COMMAND);
 			});
 			return;
 		}
 		if (!event.getArgs().matches("^\\d+$")) {
 			chan.sendMessage("Try again dipshit, put a real number next time!").queue(m -> {
-				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: invalid parameter");
+				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: invalid parameter", LoggingSections.COMMAND);
 			});
 			return;
 		}
@@ -40,13 +41,13 @@ public class RollCommand extends Command {
 			sides = Long.parseLong(event.getArgs());
 		} catch (NumberFormatException e) {
 			chan.sendMessage("Try again dipshit, put a smaller number next time!").queue(m -> {
-				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: number too large");
+				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: number too large", LoggingSections.COMMAND);
 			});
 			return;
 		}
 		if (sides < 2) {
 			chan.sendMessage("Try again dipshit, put a bigger number next time!").queue(m -> {
-				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: number too small");
+				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: number too small", LoggingSections.COMMAND);
 			});
 			return;
 		}
@@ -55,17 +56,17 @@ public class RollCommand extends Command {
 			// CRITICAL HIT!
 			chan.sendMessage("***CRITICAL HIT!!! YOU GOT A " + roll + "!!!***").queue(m -> {
 				Logger.logInfo(
-						CommandUtil.getName(msg) + " ran command \"roll\" and got a CRITICAL HIT (" + roll + ")");
+						CommandUtil.getName(msg) + " ran command \"roll\" and got a CRITICAL HIT (" + roll + ")", LoggingSections.COMMAND);
 			});
 		} else if (roll == 1) {
 			// oof
 			chan.sendMessage("***o o f*** **, you rolled a 1...**").queue(m -> {
 				Logger.logInfo(
-						CommandUtil.getName(msg) + " ran command \"roll\" and got a critical fail (" + roll + ")");
+						CommandUtil.getName(msg) + " ran command \"roll\" and got a critical fail (" + roll + ")", LoggingSections.COMMAND);
 			});
 		} else {
 			chan.sendMessage("You rolled a **" + roll + "**!").queue(m -> {
-				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"roll\" and got a " + roll);
+				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"roll\" and got a " + roll, LoggingSections.COMMAND);
 			});
 		}
 	}

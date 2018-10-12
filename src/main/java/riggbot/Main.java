@@ -25,6 +25,7 @@ import riggbot.exceptions.ConfigValueNotFoundException;
 import riggbot.listeners.ReadyListener;
 import riggbot.logger.ErrorCodes;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 
 public class Main {
 
@@ -35,7 +36,7 @@ public class Main {
 
 	public static JDA startBot() {
 		if (!Config.configExist()) {
-			Logger.logFatal("Config File does not exist! Creating...", ErrorCodes.NO_CONFIG);
+			Logger.logFatal("Config File does not exist! Creating...", ErrorCodes.NO_CONFIG, LoggingSections.CONFIG);
 		} else {
 			try {
 				EventWaiter cmdWaiter = new EventWaiter();
@@ -45,11 +46,11 @@ public class Main {
 				;
 				return jda;
 			} catch (LoginException e) {
-				Logger.logFatal("Somthing went wrong!", ErrorCodes.LOGIN_EXCEPTION);
+				Logger.logFatal("Somthing went wrong: "+e.getMessage(), ErrorCodes.LOGIN_EXCEPTION, LoggingSections.MAIN);
 			} catch (IllegalArgumentException e) {
-				Logger.logFatal("Somthing went wrong!", ErrorCodes.ILLEAGE_ARGS);
+				Logger.logFatal("Somthing went wrong: "+e.getMessage(), ErrorCodes.ILLEAGE_ARGS, LoggingSections.MAIN);
 			} catch (ConfigValueNotFoundException e) {
-				Logger.logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT);
+				Logger.logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT, LoggingSections.CONFIG);
 			}
 		}
 		return null;
@@ -61,7 +62,7 @@ public class Main {
 		try {
 			c.setPrefix(Config.getValue("prefix").getValue());
 		} catch (ConfigValueNotFoundException e) {
-			Logger.logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT);
+			Logger.logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT, LoggingSections.CONFIG);
 			e.printStackTrace();
 		}
 		c.setOwnerId("117041162052698119");

@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 
 public class EightBallCommand extends Command {
@@ -47,7 +48,7 @@ public class EightBallCommand extends Command {
 		Answers.put(20, "Very doubtful.");
 		String ans = Answers.get(((int) Math.floor(Math.random() * Answers.size() + 1)));
 		chan.sendMessage(ans).queue(m -> {
-			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"8ball\", recieved " + ans);
+			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"8ball\", recieved " + ans, LoggingSections.COMMAND);
 		});
 	}
 }

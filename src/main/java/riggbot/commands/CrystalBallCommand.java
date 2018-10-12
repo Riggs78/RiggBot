@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 
 public class CrystalBallCommand extends Command {
@@ -36,18 +37,18 @@ public class CrystalBallCommand extends Command {
 			}
 			if (Fortunes.size()==0) {
 				chan.sendMessage("Sorry, I don't have any jokes right now.").queue(m->{
-					Logger.logWarn("DadJokeList.txt is empty");
+					Logger.logWarn("DadJokeList.txt is empty", LoggingSections.COMMAND);
 				});
 				scan.close();
 				return;
 			}
 			chan.sendMessage(Fortunes.get((int) Math.floor(Math.random() * Fortunes.size()))).queue(m -> {
-				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"crystalball\", received their fortune");
+				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"crystalball\", received their fortune", LoggingSections.COMMAND);
 			});
 			scan.close();
 		} catch (FileNotFoundException e) {
 			chan.sendMessage("Sorry, I don't have any fortunes right now.").queue(m -> {
-				Logger.logWarn("Fortunes.txt not found");
+				Logger.logWarn("Fortunes.txt not found", LoggingSections.COMMAND);
 				return;
 			});
 		}

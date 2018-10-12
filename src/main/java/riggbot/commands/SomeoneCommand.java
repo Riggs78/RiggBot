@@ -10,6 +10,7 @@ import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 
 public class SomeoneCommand extends Command {
@@ -27,6 +28,6 @@ public class SomeoneCommand extends Command {
 		Message msg = event.getMessage();
 		List<Member> mems = chan.getGuild().getMembers();
 		String men = mems.get((int) Math.floor(Math.random()*mems.size())).getAsMention();
-		chan.sendMessage(men).queue(m -> Logger.logInfo(CommandUtil.getName(msg) + " ran command \"someone\", mentioned " + men));
+		chan.sendMessage(men).queue(m -> Logger.logInfo(CommandUtil.getName(msg) + " ran command \"someone\", mentioned " + men, LoggingSections.COMMAND));
 	}
 }

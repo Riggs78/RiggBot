@@ -8,6 +8,7 @@ import riggbot.exceptions.ConfigFormatException;
 import riggbot.exceptions.ConfigValueNotFoundException;
 import riggbot.logger.ErrorCodes;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 
 public class Config {
 
@@ -20,7 +21,7 @@ public class Config {
 				cfg.getParentFile().mkdirs();
 				cfg.createNewFile();
 			} catch (IOException e) {
-				Logger.logFatal("Failed to make config file: " + e.getMessage(), ErrorCodes.CONFIG_NO_ACCESS);
+				Logger.logFatal("Failed to make config file: " + e.getMessage(), ErrorCodes.CONFIG_NO_ACCESS, LoggingSections.CONFIG);
 			}
 			populateCfg(cfg);
 			return false;
@@ -33,9 +34,10 @@ public class Config {
 	private static void parseConfig(File file) {
 		try {
 			cfgValues = ConfigParse.parseAll(file);
-			Logger.logDebug(cfgValues.toString());
+			Logger.logDebug(cfgValues.toString(),LoggingSections.CONFIG);
 		} catch (ConfigFormatException e) {
-			Logger.logFatal("The config file was malformed: " + e.getMessage(), ErrorCodes.CONFIG_INVALID);
+			Logger.stackTrace(e);
+			Logger.logFatal("The config file was malformed: " + e.getMessage(), ErrorCodes.CONFIG_INVALID, LoggingSections.CONFIG);
 		}
 	}
 
@@ -48,8 +50,11 @@ public class Config {
 	}
 
 	private static void populateCfg(File file) {
+		ConfigWriter.makeHeader(file);
 		ConfigWriter.write(file,new ConfigValue(ConfigTypes.STRING, "prefix", "!", "!", "Command prefix the bot uses"));
 		ConfigWriter.write(file,new ConfigValue(ConfigTypes.STRING, "LogLevel", "Info", "Info", "Logging level to use. Will log everything from the given level up. Fatal->Warn->Info->Debug"));
 		ConfigWriter.write(file,new ConfigValue(ConfigTypes.STRING, "token", "", "undef", "Token the bot uses to connect to the bot account"));
+	
+		ConfigWriter.write(file,new ConfigValue(ConfigTypes.INT, "test", "3838383", "2381239810283", "test"));
 	}
 }

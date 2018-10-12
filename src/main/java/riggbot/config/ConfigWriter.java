@@ -9,6 +9,7 @@ import java.util.Date;
 
 import riggbot.logger.ErrorCodes;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 
 public class ConfigWriter {
 
@@ -30,11 +31,11 @@ public class ConfigWriter {
 				w.append("#"+cfgVal.getDesc()+" D:["+cfgVal.getDefaultValue()+"]\n");
 				w.append("D:"+cfgVal.getName()+"="+cfgVal.getValue()+";\n\n");
 			}else {
-				Logger.logWarn("Tried to write config value with unknown type "+cfgVal.getType().getType()+"! Skipping...");
+				Logger.logWarn("Tried to write config value with unknown type "+cfgVal.getType().getType()+"! Skipping...", LoggingSections.CONFIG);
 			}
 			w.close();
 		} catch (IOException e) {
-			Logger.logFatal("Unable to write to config file", ErrorCodes.CONFIG_NO_ACCESS);
+			Logger.logFatal("Unable to write to config file", ErrorCodes.CONFIG_NO_ACCESS, LoggingSections.CONFIG);
 			e.printStackTrace();
 		}
 		
@@ -47,7 +48,7 @@ public class ConfigWriter {
 			w.write("## This is the config file for RiggBot\n\n");
 			w.close();
 		} catch (IOException e1) {
-			Logger.logFatal("Unable to write to config file", ErrorCodes.CONFIG_NO_ACCESS);
+			Logger.logFatal("Unable to write to config file", ErrorCodes.CONFIG_NO_ACCESS, LoggingSections.CONFIG);
 			e1.printStackTrace();
 		}
 	}

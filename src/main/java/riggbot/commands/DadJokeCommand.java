@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 
 public class DadJokeCommand extends Command {
@@ -37,19 +38,19 @@ public class DadJokeCommand extends Command {
 			}
 			if (DadJokes.size()==0) {
 				chan.sendMessage("Sorry, I don't have any jokes right now.").queue(m->{
-					Logger.logWarn("DadJokeList.txt is empty");
+					Logger.logWarn("DadJokeList.txt is empty", LoggingSections.COMMAND);
 				});
 				JokeScan.close();
 				return;
 			}
 			chan.sendMessage(DadJokes.get((int) Math.floor(Math.random() * DadJokes.size()))).queue(m -> {
 			});
-			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"dadjoke\", received a joke");
+			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"dadjoke\", received a joke", LoggingSections.COMMAND);
 
 			JokeScan.close();
 		} catch (FileNotFoundException e) {
 			chan.sendMessage("Sorry, I don't have any jokes right now.").queue(m -> {
-				Logger.logWarn("DadJokeList.txt not found");
+				Logger.logWarn("DadJokeList.txt not found", LoggingSections.COMMAND);
 				return;
 			});
 		}

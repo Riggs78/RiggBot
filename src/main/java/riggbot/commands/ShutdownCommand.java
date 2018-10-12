@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 
 public class ShutdownCommand extends Command{
@@ -20,8 +21,9 @@ public class ShutdownCommand extends Command{
 		this.name = "shutdown";
 		this.help = "Shuts the bot down";
 		this.botPermissions = new Permission[] {Permission.MESSAGE_WRITE};
-		this.ownerCommand = true;
-		this.aliases = new String[] { "shut" , "stop" , "quit" , "end" , "fuck" , "oof" , "whoops" , "oops" , "leave" , "off", "haveyoutriedturningitonandoffagain" };
+		//this.ownerCommand = true;
+		this.requiredRole = "Bot Commander";
+		this.aliases = new String[] { "shut" , "stop" , "quit" , "end" , "fuck" , "oof" , "whoops" , "oops" , "leave" , "off", "haveyoutriedturningitonandoffagain", "oofouchowiemybones" };
 	}
 	
 	@Override
@@ -38,19 +40,19 @@ public class ShutdownCommand extends Command{
 				}
 				if (gbs.size()==0) {
 					chan.sendMessage("Shutting Down...").queue(m->{
-						Logger.logWarn("Goodbyes.txt is empty, still shutting down");
+						Logger.logWarn("Goodbyes.txt is empty, still shutting down", LoggingSections.COMMAND);
 						m.getJDA().shutdown();
 					});
 					scan.close();
 					return;
 				}
 				chan.sendMessage(gbs.get((int)Math.floor(Math.random()*gbs.size()))).queue(m -> {
-				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"Shutdown\", shutting down gracfully");
+				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"Shutdown\", shutting down gracfully", LoggingSections.COMMAND);
 				m.getJDA().shutdown();
 				scan.close();
 				});} catch (FileNotFoundException e) {
 				chan.sendMessage("Shutting Down...").queue(m -> {
-					Logger.logWarn("Goodbyes.txt not found, still shutting down");
+					Logger.logWarn("Goodbyes.txt not found, still shutting down", LoggingSections.COMMAND);
 					m.getJDA().shutdown();
 					return;
 			});

@@ -7,6 +7,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 
 public class WugCommand extends Command {
@@ -26,7 +27,7 @@ public class WugCommand extends Command {
 		String emj1 = emj.substring(7, 25);
 		String emj2 = "<:wug:" + emj1 + ">";
 		chan.sendMessage(emj2).queue(m -> {
-			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"wug\", responded with \"wug\"");
+			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"wug\", responded with \"wug\"", LoggingSections.COMMAND);
 		});
 	}
 

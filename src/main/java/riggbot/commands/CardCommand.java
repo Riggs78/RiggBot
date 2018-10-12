@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 
 public class CardCommand extends Command {
@@ -29,7 +30,7 @@ public class CardCommand extends Command {
 		int img = (int) Math.floor(Math.random() * Number_of_Cards);
 		final int Image = img;
 				chan.sendFile(new File("src/main/resources/Cards/card (" + img + ").png")).queue(m -> {
-			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"card\", received " + "card (" + Image + ").png");
+			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"card\", received " + "card (" + Image + ").png", LoggingSections.COMMAND);
 		});
 	}
 }

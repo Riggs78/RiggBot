@@ -7,6 +7,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 
 public class PingCommand extends Command {
@@ -23,7 +24,7 @@ public class PingCommand extends Command {
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
 		chan.sendMessage("Pong! (" + event.getJDA().getPing() + "ms)").queue(
-				m -> Logger.logInfo(CommandUtil.getName(msg) + " ran command \"ping\", responded with \"" + m.getContentRaw() + "\""));
+				m -> Logger.logInfo(CommandUtil.getName(msg) + " ran command \"ping\", responded with \"" + m.getContentRaw() + "\"", LoggingSections.COMMAND));
 	}
 
 }

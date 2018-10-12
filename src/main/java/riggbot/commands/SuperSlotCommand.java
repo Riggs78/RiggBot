@@ -13,6 +13,7 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.ErrorCodes;
 import riggbot.logger.Logger;
+import riggbot.logger.LoggingSections;
 import riggbot.util.CommandUtil;
 import riggbot.util.Pair;
 
@@ -92,17 +93,16 @@ public class SuperSlotCommand extends Command {
 					win = slotEmote.get(slotEmote.get(slot1)).getRight();
 					chan.sendMessage(slots + "\n" + win + "\n***Congratulations, " + msg.getAuthor().getName()+"***")
 							.queue(m -> {
-								Logger.logInfo(CommandUtil.getName(msg) + " ran command \"slots\", they won!");
+								Logger.logInfo(CommandUtil.getName(msg) + " ran command \"slots\", they won!", LoggingSections.COMMAND);
 							});
 				} else {
 					chan.sendMessage(slots + "\n **HAHA YOU LOST!!!!**").queue(m -> {
-						Logger.logInfo(CommandUtil.getName(msg) + " ran command \"slots\", they didn't win");
+						Logger.logInfo(CommandUtil.getName(msg) + " ran command \"slots\", they didn't win", LoggingSections.COMMAND);
 					});
 				}
 			}
 		} catch (FileNotFoundException e) {
-			// TODO: add new err code
-			Logger.logFatal("No Fortunes.txt Found", ErrorCodes.NO_CONFIG);
+			Logger.logFatal("No Fortunes.txt Found", ErrorCodes.NO_CONFIG, LoggingSections.COMMAND);
 			e.printStackTrace();
 		}
 	}
