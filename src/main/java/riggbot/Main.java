@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import riggbot.commands.CardCommand;
+import riggbot.commands.ConcernCommand;
 import riggbot.commands.DadJokeCommand;
 import riggbot.commands.EightBallCommand;
 import riggbot.commands.CrystalBallCommand;
@@ -68,7 +69,7 @@ public class Main {
 		c.setOwnerId("117041162052698119");
 		c.addCommands(new PingCommand(), new WugCommand(), new ShutdownCommand(), new RollCommand(), new CardCommand(),
 				new SomeoneCommand(), new EightBallCommand(), new DadJokeCommand(),
-				new SlotCommand(), new WinSlotCommand(), new CrystalBallCommand(), new SuperSlotCommand());
+				new SlotCommand(), new WinSlotCommand(), new CrystalBallCommand(), new SuperSlotCommand(), new ConcernCommand());
 		return c;
 	}
 }

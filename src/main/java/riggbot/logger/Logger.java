@@ -20,7 +20,7 @@ public class Logger {
 		try {
 			String level = Config.getValue("LogLevel").getValue().trim().toUpperCase();
 			if (level.equals("INFO")||level.equals("DEBUG")) {
-				System.out.println("["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [" +l.getSection()+ "] [INFO] "+m);		
+				System.out.println("\n"+"["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [" +l.getSection()+ "] [INFO] "+m);		
 			}
 		} catch (ConfigValueNotFoundException e) {
 			logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT, LoggingSections.CONFIG);
@@ -31,7 +31,7 @@ public class Logger {
 		try {
 			String level = Config.getValue("LogLevel").getValue().trim().toUpperCase();
 			if (level.equals("WARN")||level.equals("INFO")||level.equals("DEBUG")) {
-				System.err.println("["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [" +l.getSection()+ "] [WARN] "+m);		
+				System.err.println("\n"+"["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [" +l.getSection()+ "] [WARN] "+m);		
 			}
 		} catch (ConfigValueNotFoundException e) {
 			logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT, LoggingSections.CONFIG);
@@ -40,7 +40,7 @@ public class Logger {
 	}
 	
 	public static void logFatal(String m, ErrorCodes errCode, LoggingSections l) {
-		System.err.println("["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [" +l.getSection()+ "] [FATAL] "+m);
+		System.err.println("\n"+"["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [" +l.getSection()+ "] [FATAL] "+m);
 		System.exit(errCode.getErrCode());
 	}
 	
@@ -48,7 +48,7 @@ public class Logger {
 		try {
 			String level = Config.getValue("LogLevel").getValue().trim().toUpperCase();
 			if (level.equals("DEBUG")) {
-				System.out.println("["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [" +l.getSection()+ "] [DEBUG] "+m);
+				System.out.println("\n"+"["+new SimpleDateFormat("HH:mm:ss").format(new Date().getTime())+"] [Riggbot] [" +l.getSection()+ "] [DEBUG] "+m);
 			}
 		} catch (ConfigValueNotFoundException e) {
 			logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT, LoggingSections.CONFIG);
