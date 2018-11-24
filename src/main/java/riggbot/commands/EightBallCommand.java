@@ -23,6 +23,7 @@ public class EightBallCommand extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
+		System.out.print("?");
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
 		HashMap<Integer, String> Answers = new HashMap<>();

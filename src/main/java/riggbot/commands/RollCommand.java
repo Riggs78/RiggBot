@@ -22,6 +22,7 @@ public class RollCommand extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
+		System.out.print("?");
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
 		long sides = 2;

@@ -24,6 +24,7 @@ public class SomeoneCommand extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
+		System.out.print("?");
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
 		List<Member> mems = chan.getGuild().getMembers();

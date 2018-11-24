@@ -19,7 +19,8 @@ public class ConcernCommand extends Command {
 		this.help = "When you're concerned for someone";
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
 		this.arguments = "[@Inebriated] [Name of Inebriated]";
-		this.ownerCommand = true;
+		//this.ownerCommand = true;
+		this.requiredRole = "Bot Commander";
 	}
 
 	public static String getIdNum() {
@@ -31,6 +32,7 @@ public class ConcernCommand extends Command {
 	}
 	@Override
 	protected void execute(CommandEvent event) {
+		System.out.print("?");
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
 		if (!event.getArgs().equals("off")) {

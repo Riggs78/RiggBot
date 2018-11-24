@@ -29,6 +29,7 @@ public class WinSlotCommand extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
+		System.out.print("?");
 		TextChannel chan = event.getTextChannel();
 		Message msg = event.getMessage();
 		int c = 0;

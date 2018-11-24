@@ -14,7 +14,8 @@ public class ReadyListener implements EventListener {
 
 	public void onEvent(Event event) {
 		if (event instanceof ReadyEvent) {
-			Logger.logInfo("Hey guys and welcome to episode 1 of my Minecraft Let's Play", LoggingSections.MAIN);
+			Logger.logInfo("Hey guys and welcome to episode" + (int) Math.floor(Math.random() * Integer.MAX_VALUE)
+					+ "of my Minecraft Let's Play", LoggingSections.MAIN);
 			// event.getJDA().getGuilds().get(0).getDefaultChannel().sendMessage("Penis");
 		}
 		if (event instanceof MessageReceivedEvent) {
