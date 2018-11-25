@@ -18,7 +18,7 @@ public class ConcernCommand extends Command {
 		this.aliases = new String[] { "con", "drunk", "high" };
 		this.help = "When you're concerned for someone";
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
-		this.arguments = "[@Inebriated] [Name of Inebriated]";
+		this.arguments = "[@Inebriated]";
 		//this.ownerCommand = true;
 		this.requiredRole = "Bot Commander";
 	}

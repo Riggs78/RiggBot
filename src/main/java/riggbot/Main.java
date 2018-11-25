@@ -12,6 +12,7 @@ import riggbot.commands.CardCommand;
 import riggbot.commands.ConcernCommand;
 import riggbot.commands.DadJokeCommand;
 import riggbot.commands.EightBallCommand;
+import riggbot.commands.GayGuardCommand;
 import riggbot.commands.CrystalBallCommand;
 import riggbot.commands.PingCommand;
 import riggbot.commands.RollCommand;
@@ -69,7 +70,7 @@ public class Main {
 		c.setOwnerId("117041162052698119");
 		c.addCommands(new PingCommand(), new WugCommand(), new ShutdownCommand(), new RollCommand(), new CardCommand(),
 				new SomeoneCommand(), new EightBallCommand(), new DadJokeCommand(),
-				new SlotCommand(), new WinSlotCommand(), new CrystalBallCommand(), new SuperSlotCommand(), new ConcernCommand());
+				new SlotCommand(), new WinSlotCommand(), new CrystalBallCommand(), new SuperSlotCommand(), new ConcernCommand(), new GayGuardCommand());
 		return c;
 	}
 }

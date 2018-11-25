@@ -14,23 +14,28 @@ public class ReadyListener implements EventListener {
 
 	public void onEvent(Event event) {
 		if (event instanceof ReadyEvent) {
-			Logger.logInfo("Hey guys and welcome to episode" + (int) Math.floor(Math.random() * Integer.MAX_VALUE)
-					+ "of my Minecraft Let's Play", LoggingSections.MAIN);
+			Logger.logInfo("Hey guys and welcome to episode " + (int) Math.floor(Math.random() * Integer.MAX_VALUE)
+					+ " of my Minecraft Let's Play", LoggingSections.MAIN);
 			// event.getJDA().getGuilds().get(0).getDefaultChannel().sendMessage("Penis");
 		}
 		if (event instanceof MessageReceivedEvent) {
 			Message msg = (Message) ((MessageReceivedEvent) event).getMessage();
-			if (msg.getAuthor().getId().equals(ConcernCommand.getIdNum())) {
-				msg.getChannel().sendMessage("Get well soon, " + msg.getAuthor().getAsMention()).queue(m -> {
-					Logger.logInfo(CommandUtil.getName(msg) + " was sent prayers", LoggingSections.COMMAND);
-				});
-				System.out.print("!");
-			} else if (msg.getContentRaw().substring(0).equals(",")) {
-				System.out.print("?");
-			} else {
-				System.out.print(".");
+			if (!msg.getAuthor().isBot()) {
+				if (msg.getAuthor().getId().equals(ConcernCommand.getIdNum())) {
+					msg.getChannel().sendMessage("Get well soon, " + msg.getAuthor().getAsMention()).queue(m -> {
+						Logger.logInfo(CommandUtil.getName(msg) + " was sent prayers", LoggingSections.COMMAND);
+					});
+					System.out.print("!");
+				} else {
+					System.out.print(".");
+				}
+				if (msg.getContentStripped().toLowerCase().contains("gay") && GayGuardCommand.getGayGuard()) {
+					msg.getChannel().sendMessage("no, ur gay").queue(m -> {
+						Logger.logInfo(CommandUtil.getName(msg) + " is gay", LoggingSections.COMMAND);
+					});
+					System.out.println(":");
+				}
 			}
 		}
-
 	}
 }
