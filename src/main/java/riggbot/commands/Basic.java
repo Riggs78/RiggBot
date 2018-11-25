@@ -15,8 +15,8 @@ public class Basic extends Command {
 		this.arguments = "";
 		this.cooldown = 1000;
 		this.hidden = true;
-		//this.requiredRole = "Bot Commander";
-		//this.ownerCommand = true;
+		this.requiredRole = "Bot Commander";
+		this.ownerCommand = true;
 	}
 
 	@Override

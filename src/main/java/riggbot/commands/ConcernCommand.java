@@ -28,7 +28,7 @@ public class ConcernCommand extends Command {
 		if (!event.getArgs().equals("off")) {
 			long Id = Long.parseLong(event.getArgs().replaceAll("[^0-9]", ""));
 			IdNum = "" + Id;
-			reply = "Get well soon, <@" + IdNum + ">";
+			reply = "I'll pray for <@" + IdNum + ">";
 			Output.msg(event, reply, name);
 		} else {
 			IdNum = "0";
