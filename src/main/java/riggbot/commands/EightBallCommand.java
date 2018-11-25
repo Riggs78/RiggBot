@@ -6,26 +6,19 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import riggbot.logger.Logger;
-import riggbot.logger.LoggingSections;
-import riggbot.util.CommandUtil;
 
 public class EightBallCommand extends Command {
 
 	public EightBallCommand() {
 		this.name = "8ball";
-		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
-		this.help = "Answers truthfully";
-		this.aliases = new String[] { "8b", "eightball", "eball", "eb" };
+		this.aliases = new String[] { "8b", "eightball", "eightb" };
+		this.help = "Gives you answers";
+		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE, Permission.MESSAGE_ADD_REACTION };
+		// this.ownerCommand = true;
 	}
 
 	@Override
 	protected void execute(CommandEvent event) {
-		System.out.print("?");
-		TextChannel chan = event.getTextChannel();
-		Message msg = event.getMessage();
 		HashMap<Integer, String> Answers = new HashMap<>();
 		Answers.put(1, "It is certain.");
 		Answers.put(2, "It is decidely so.");
@@ -47,9 +40,7 @@ public class EightBallCommand extends Command {
 		Answers.put(18, "My sources say no.");
 		Answers.put(19, "Outlook not so good.");
 		Answers.put(20, "Very doubtful.");
-		String ans = Answers.get(((int) Math.floor(Math.random() * Answers.size() + 1)));
-		chan.sendMessage(ans).queue(m -> {
-			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"8ball\", recieved " + ans, LoggingSections.COMMAND);
-		});
+		String reply = Answers.get(((int) Math.floor(Math.random() * Answers.size() + 1)));
+		Output.msg(event, reply, name);
 	}
 }

@@ -9,51 +9,40 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
 import riggbot.logger.LoggingSections;
-import riggbot.util.CommandUtil;
 
 public class DadJokeCommand extends Command {
-
 	public DadJokeCommand() {
-		this.name = "dad";
-		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
-		this.help = "Tells a really good joke.";
-		this.aliases = new String[] { "joke", "dadjoke", "dj" };
+		this.name = "DadJoke";
+		this.aliases = new String[] {"dj","dad","joke","j"};
+		this.help = "Tells you a joke";
+		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE, Permission.MESSAGE_ADD_REACTION };
+		//this.ownerCommand = true;
 	}
 
 	@Override
 	protected void execute(CommandEvent event) {
-		System.out.print("?");
-		TextChannel chan = event.getTextChannel();
-		Message msg = event.getMessage();
-		HashMap<Integer, String> DadJokes = new HashMap<>();
+		String reply = "I'm not mad, I'm just disappointed.";
+		HashMap<Integer, String> Fortunes = new HashMap<>();
+		File FortuneList = new File("config/DadJokeList.txt");
 		int i = 0;
-		File JokeList = new File("config/DadJokeList.txt");
 		try {
-			Scanner JokeScan = new Scanner(JokeList);
-			while (JokeScan.hasNextLine()) {
-				DadJokes.put(i++, JokeScan.nextLine().toLowerCase());
+			Scanner scan = new Scanner(FortuneList);
+			while (scan.hasNextLine()) {
+				Fortunes.put(i++, scan.nextLine().toLowerCase());
 			}
-			if (DadJokes.size()==0) {
-				chan.sendMessage("Sorry, I don't have any jokes right now.").queue(m->{
-					Logger.logWarn("DadJokeList.txt is empty", LoggingSections.COMMAND);
-				});
-				JokeScan.close();
-				return;
+			if (Fortunes.size() == 0) {
+				Output.msg(event, reply, name);
+				Logger.logWarn("DadJokeList.txt is empty", LoggingSections.COMMAND);
 			}
-			chan.sendMessage(DadJokes.get((int) Math.floor(Math.random() * DadJokes.size()))).queue(m -> {
-			});
-			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"dadjoke\", received a joke", LoggingSections.COMMAND);
-
-			JokeScan.close();
+			reply = Fortunes.get((int)Math.floor(Math.random()*Fortunes.size()));
+			Output.msg(event, reply, name);
+			scan.close();
 		} catch (FileNotFoundException e) {
-			chan.sendMessage("Sorry, I don't have any jokes right now.").queue(m -> {
+				Output.msg(event, reply, name);
 				Logger.logWarn("DadJokeList.txt not found", LoggingSections.COMMAND);
-				return;
-			});
 		}
 	}
+
 }

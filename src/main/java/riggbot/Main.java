@@ -10,17 +10,15 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import riggbot.commands.CardCommand;
 import riggbot.commands.ConcernCommand;
+import riggbot.commands.CrystalBallCommand;
 import riggbot.commands.DadJokeCommand;
 import riggbot.commands.EightBallCommand;
 import riggbot.commands.GayGuardCommand;
-import riggbot.commands.CrystalBallCommand;
 import riggbot.commands.PingCommand;
 import riggbot.commands.RollCommand;
 import riggbot.commands.ShutdownCommand;
 import riggbot.commands.SlotCommand;
 import riggbot.commands.SomeoneCommand;
-import riggbot.commands.SuperSlotCommand;
-import riggbot.commands.WinSlotCommand;
 import riggbot.commands.WugCommand;
 import riggbot.config.Config;
 import riggbot.exceptions.ConfigValueNotFoundException;
@@ -48,9 +46,11 @@ public class Main {
 				;
 				return jda;
 			} catch (LoginException e) {
-				Logger.logFatal("Somthing went wrong: "+e.getMessage(), ErrorCodes.LOGIN_EXCEPTION, LoggingSections.MAIN);
+				Logger.logFatal("Somthing went wrong: " + e.getMessage(), ErrorCodes.LOGIN_EXCEPTION,
+						LoggingSections.MAIN);
 			} catch (IllegalArgumentException e) {
-				Logger.logFatal("Somthing went wrong: "+e.getMessage(), ErrorCodes.ILLEAGE_ARGS, LoggingSections.MAIN);
+				Logger.logFatal("Somthing went wrong: " + e.getMessage(), ErrorCodes.ILLEAGE_ARGS,
+						LoggingSections.MAIN);
 			} catch (ConfigValueNotFoundException e) {
 				Logger.logFatal(e.getMessage(), ErrorCodes.CONFIG_VALUE_NONEXISTANT, LoggingSections.CONFIG);
 			}
@@ -69,8 +69,8 @@ public class Main {
 		}
 		c.setOwnerId("117041162052698119");
 		c.addCommands(new PingCommand(), new WugCommand(), new ShutdownCommand(), new RollCommand(), new CardCommand(),
-				new SomeoneCommand(), new EightBallCommand(), new DadJokeCommand(),
-				new SlotCommand(), new WinSlotCommand(), new CrystalBallCommand(), new SuperSlotCommand(), new ConcernCommand(), new GayGuardCommand());
+				new SomeoneCommand(), new EightBallCommand(), new DadJokeCommand(), new SlotCommand(), new CrystalBallCommand(), new ConcernCommand(),
+				new GayGuardCommand());
 		return c;
 	}
 }

@@ -4,71 +4,58 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
 import riggbot.logger.Logger;
 import riggbot.logger.LoggingSections;
-import riggbot.util.CommandUtil;
 
 public class RollCommand extends Command {
 
 	public RollCommand() {
 		this.name = "roll";
-		this.help = "Rolls a die with x number of sides";
-		this.arguments = "<sides>";
-		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE };
-		this.aliases = new String[] { "r" };
+		this.aliases = new String[] { "r", "d" };
+		this.help = "Rolls a dice of the given sides";
+		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE, Permission.MESSAGE_ADD_REACTION };
+		this.arguments = "[sides]";
+		// this.ownerCommand = true;
 	}
 
 	@Override
 	protected void execute(CommandEvent event) {
-		System.out.print("?");
-		TextChannel chan = event.getTextChannel();
-		Message msg = event.getMessage();
-		long sides = 2;
-		if (event.getArgs().isEmpty()) {
-			chan.sendMessage("Try again dipshit, put a number next time!").queue(m -> {
-				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: no parameter given", LoggingSections.COMMAND);
-			});
-			return;
+		String reply = "Invalid Argument";
+		String args = event.getArgs();
+		long sides;
+		if (args.isEmpty() | !event.getArgs().matches("^\\d+$")) {
+			Output.msg(event, reply, name);
+			Logger.logWarn(Output.getName(event) + " tried to run \"roll\", but it failed: no args given",
+					LoggingSections.COMMAND);
 		}
-		if (!event.getArgs().matches("^\\d+$")) {
-			chan.sendMessage("Try again dipshit, put a real number next time!").queue(m -> {
-				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: invalid parameter", LoggingSections.COMMAND);
-			});
-			return;
+		if (!args.matches("^\\d+$")) {
+			Output.msg(event, reply, name);
+			Logger.logWarn(Output.getName(event) + " tried to run \"roll\", but it failed: arg is no int",
+					LoggingSections.COMMAND);
 		}
 		try {
-			sides = Long.parseLong(event.getArgs());
+			sides = Long.parseLong(args);
 		} catch (NumberFormatException e) {
-			chan.sendMessage("Try again dipshit, put a smaller number next time!").queue(m -> {
-				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: number too large", LoggingSections.COMMAND);
-			});
+			Output.msg(event, reply, name);
+			Logger.logWarn(Output.getName(event) + " tried to run \"roll\", but it failed: arg too large",
+					LoggingSections.COMMAND);
 			return;
 		}
 		if (sides < 2) {
-			chan.sendMessage("Try again dipshit, put a bigger number next time!").queue(m -> {
-				Logger.logWarn(CommandUtil.getName(msg) + " tried to run \"roll\", but it failed: number too small", LoggingSections.COMMAND);
-			});
-			return;
+			Output.msg(event, reply, name);
+			Logger.logWarn(Output.getName(event) + " tried to run \"roll\", but it failed: arg too small",
+					LoggingSections.COMMAND);
 		}
 		long roll = (long) Math.floor(Math.random() * sides + 1);
 		if (roll == sides) {
-			// CRITICAL HIT!
-			chan.sendMessage("***CRITICAL HIT!!! YOU GOT A " + roll + "!!!***").queue(m -> {
-				Logger.logInfo(
-						CommandUtil.getName(msg) + " ran command \"roll\" and got a CRITICAL HIT (" + roll + ")", LoggingSections.COMMAND);
-			});
+			reply = "***CRITICAL SUCCESS***, You rolled a " + roll;
+			Output.msg(event, reply, name);
 		} else if (roll == 1) {
-			// oof
-			chan.sendMessage("***o o f*** **, you rolled a 1...**").queue(m -> {
-				Logger.logInfo(
-						CommandUtil.getName(msg) + " ran command \"roll\" and got a critical fail (" + roll + ")", LoggingSections.COMMAND);
-			});
+			reply = "***CRITICAL FAILURE***, You rolled a " + roll;
+			Output.msg(event, reply, name);
 		} else {
-			chan.sendMessage("You rolled a **" + roll + "**!").queue(m -> {
-				Logger.logInfo(CommandUtil.getName(msg) + " ran command \"roll\" and got a " + roll, LoggingSections.COMMAND);
-			});
+			reply = "You rolled a " + roll;
+			Output.msg(event, reply, name);
 		}
 	}
 }

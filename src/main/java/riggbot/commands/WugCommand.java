@@ -4,32 +4,22 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import riggbot.logger.Logger;
-import riggbot.logger.LoggingSections;
-import riggbot.util.CommandUtil;
 
 public class WugCommand extends Command {
 
 	public WugCommand() {
 		this.name = "wug";
-		this.aliases = new String[] { "wuggy" , "w" };
+		this.aliases = new String[] { "wuggy", "w" };
 		this.help = "haha wug";
 		this.botPermissions = new Permission[] { Permission.MESSAGE_WRITE, Permission.MESSAGE_ADD_REACTION };
+		// this.ownerCommand = true;
 	}
 
 	@Override
 	protected void execute(CommandEvent event) {
-		System.out.print("?");
-		TextChannel chan = event.getTextChannel();
-		Message msg = event.getMessage();
-		String emj = "" + chan.getGuild().getEmotesByName("wug", true);
-		String emj1 = emj.substring(7, 25);
-		String emj2 = "<:wug:" + emj1 + ">";
-		chan.sendMessage(emj2).queue(m -> {
-			Logger.logInfo(CommandUtil.getName(msg) + " ran command \"wug\", responded with \"wug\"", LoggingSections.COMMAND);
-		});
+		String reply = "<:wug:" + ("" + event.getTextChannel().getGuild().getEmotesByName("wug", true)).substring(7, 25)
+				+ ">";
+		Output.msg(event, reply, name);
 	}
 
 }

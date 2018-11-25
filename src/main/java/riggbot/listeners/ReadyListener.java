@@ -16,7 +16,7 @@ public class ReadyListener implements EventListener {
 		if (event instanceof ReadyEvent) {
 			Logger.logInfo("Hey guys and welcome to episode " + (int) Math.floor(Math.random() * Integer.MAX_VALUE)
 					+ " of my Minecraft Let's Play", LoggingSections.MAIN);
-			// event.getJDA().getGuilds().get(0).getDefaultChannel().sendMessage("Penis");
+			// event.getJDA().getGuilds().get(0).getDefaultChannel().sendMessage("RiggBot: ***ONLINE***");
 		}
 		if (event instanceof MessageReceivedEvent) {
 			Message msg = (Message) ((MessageReceivedEvent) event).getMessage();
@@ -33,9 +33,10 @@ public class ReadyListener implements EventListener {
 					msg.getChannel().sendMessage("no, ur gay").queue(m -> {
 						Logger.logInfo(CommandUtil.getName(msg) + " is gay", LoggingSections.COMMAND);
 					});
-					System.out.println(":");
+					System.out.print(":");
 				}
 			}
 		}
 	}
+	
 }
